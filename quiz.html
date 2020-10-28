@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <title>Quiz App</title>
+	    <link rel="stylesheet" href="quiz.css">
+	    <meta name="viewport" content="width=divice-width, initial-scale=1.0"/>
+	    <link rel="icon" href="quiz.png" type="image/x-icon">
+	    <meta name="keywords" content="Vue Js Quiz App">
+	    <meta name="description" content="Quiz App">
+	    <meta name="authoe" content="saffetfiliz1989@gmail.com">
+	    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+	    <script src="app.js" defer></script>
+    </head>
+<body>
+	<section id="contanier">
+		<div class="content">
+				<span class="start-content" v-if="!start">
+					<h1>Welcome My Quiz App </h1>
+					<button @click="start = true">Start</button>
+				</span>
+			<div 
+			    class="quiz-content"
+			    v-if="start"  
+			    v-for="(quest, index) in questions.slice(a,b)" 
+			    :key="index">
+			    <h2>Question {{b}} / {{questions.length}}</h2>
+			    <p>{{quest.question}} ?</p>
+			        <div class="choice-content">
+			    	    <button 
+			    	        v-for="(suggestion, index) in quest.suggestions" 
+			    	        @click="selected_answer(suggestion.currect), selection = true"
+			    	        :key="index">
+			    		    {{['A','B','C','D','E','F'][index]}}. {{suggestion.suggestion}}
+			    	   </button>
+			        </div>
+		    </div>
+		    <span v-if="start && !result">
+		        <button @click="next_question">Skip</button>
+			    <button @click="next_question" :disabled="!selection">Continue</button>
+		    </span>
+		    <div class="content" v-if="result">
+		    	<h3>Score {{score * 5}}</h3>
+		    	<h3>Number of Correct Answers {{score}}</h3>
+		    	<button @click="result = !result">Try Again</button>
+		    </div>
+		</div>
+	</section>
+</body>
+</html>
