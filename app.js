@@ -71,7 +71,6 @@ var app = new Vue({
         if(value >= this.questions.length){
             this.result = true;
             this.start = false;
-            this.score = 0;
             this.a = 0;
             this.b = 1;
         }
